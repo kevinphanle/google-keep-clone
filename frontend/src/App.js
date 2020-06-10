@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
+import axios from 'axios';
+
 import './App.css';
+import Navbar from './components/navbar';
+import Todo from './components/todo';
+import TodoIndex from './components/todoIndex';
+
 
 function App() {
+
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/todos/')
+      .then(res => {
+        console.log("in get todos")
+        setTodos(res.data.reverse())
+      }).catch(function (err) {
+        console.log(err);
+      })
+  }, []);
+
+  const newTodo = (todo) => {
+    return setTodos(todos => [todo, ...todos])
+  }
+
+  const deleteTodo = (id) => {
+    return setTodos(todos.filter(todo => todo._id !== id))
+  }
+  // console.log(todos);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Todo callback={newTodo.bind(this)}/>
+        <TodoIndex data={todos} deleteCallback={deleteTodo.bind(this)}/>
+      </div>
+
+    </Router>
   );
 }
 
