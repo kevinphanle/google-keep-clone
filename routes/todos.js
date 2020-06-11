@@ -56,9 +56,8 @@ router.patch('/update/:id', (req, res) => {
 
 
 router.delete('/removeTodo/:id', (req, res) => {
-  TodosModel.deleteOne({ _id: req.params.id },
-    function (todo, err) {
-      console.log(todo);
+  TodosModel.findByIdAndDelete(req.params.id,
+    function (err) {
       console.log(req.params.id)
       if (err) {
         res.status(404).send(err)
