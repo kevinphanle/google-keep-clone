@@ -20,6 +20,17 @@ router.get('/',urlencodedParser, (req, res) => {
   })
 })
 
+router.get('/:id', (req, res) => {
+  TodosModel.findById(req.params.id, function (err, todo) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("item: ", todo);
+      return res.status(200).json("Got item");
+    }
+  })
+})
+
 router.post('/addTodo', (req, res) => {
   var newTodo = new TodosModel({
     title: req.body.title,
@@ -38,7 +49,7 @@ router.post('/addTodo', (req, res) => {
 
 });
 
-router.patch('/update/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
   TodosModel.findByIdAndUpdate({ _id: req.params.id }, {
     title: req.body.title,
     text: req.body.text,
@@ -49,7 +60,8 @@ router.patch('/update/:id', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("Updated User: ", docs);
+        console.log("Updated item: ", docs);
+        return res.status(200).json("Updated item")
       }
   })
 })
@@ -64,7 +76,7 @@ router.delete('/removeTodo/:id', (req, res) => {
         return res.status(404).json({error: err})
       } else {
         console.log("delete worked")
-        return res.redirect('back');
+        return res.status(200).json("Success! Item deleted!");
         // return res.status(200).send('Success! Item Deleted');
       }
 

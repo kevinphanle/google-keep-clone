@@ -8,11 +8,13 @@ import './App.css';
 import Navbar from './components/navbar';
 import Todo from './components/todo';
 import TodoIndex from './components/todoIndex';
+import Modal from './components/modal';
 
 
 function App() {
 
   const [todos, setTodos] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:5000/todos/')
@@ -38,7 +40,9 @@ function App() {
       <div className="App">
         <Navbar />
         <Todo callback={newTodo.bind(this)}/>
-        <TodoIndex data={todos} deleteCallback={deleteTodo}/>
+        <TodoIndex data={todos} deleteCallback={deleteTodo} setModalOpen={setModalOpen}/>
+
+        {modalOpen ? <Modal setModalOpen={setModalOpen}/> : null }
       </div>
 
     </Router>

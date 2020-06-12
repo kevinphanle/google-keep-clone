@@ -191,3 +191,9 @@ form .open {
   border-bottom: 1px solid red;
   cursor: pointer;
 }
+
+
+.modal {
+  border: 1px solid red;
+  padding: 30px;
+}
