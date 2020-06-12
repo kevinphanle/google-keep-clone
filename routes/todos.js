@@ -15,7 +15,7 @@ router.get('/',urlencodedParser, (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.json(todos);
+      return res.json(todos);
     }
   })
 })
@@ -56,14 +56,18 @@ router.patch('/update/:id', (req, res) => {
 
 
 router.delete('/removeTodo/:id', (req, res) => {
+  console.log(req.params);
   TodosModel.findByIdAndDelete(req.params.id,
     function (err) {
-      console.log(req.params.id)
       if (err) {
-        res.status(404).send(err)
+        console.log("in delete error")
+        return res.status(404).json({error: err})
       } else {
-        res.status(200).send('Success! Item Deleted');
+        console.log("delete worked")
+        return res.redirect('back');
+        // return res.status(200).send('Success! Item Deleted');
       }
+
     });
 });
 

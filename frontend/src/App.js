@@ -17,7 +17,6 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:5000/todos/')
       .then(res => {
-        console.log("in get todos")
         setTodos(res.data.reverse())
       }).catch(function (err) {
         console.log(err);
@@ -29,6 +28,7 @@ function App() {
   }
 
   const deleteTodo = (id) => {
+    console.log("from app.js: ", id)
     return setTodos(todos.filter(todo => todo._id !== id))
   }
   // console.log(todos);
@@ -38,7 +38,7 @@ function App() {
       <div className="App">
         <Navbar />
         <Todo callback={newTodo.bind(this)}/>
-        <TodoIndex data={todos} deleteCallback={deleteTodo.bind(this)}/>
+        <TodoIndex data={todos} deleteCallback={deleteTodo}/>
       </div>
 
     </Router>
