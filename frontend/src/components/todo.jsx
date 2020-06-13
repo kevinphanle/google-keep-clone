@@ -19,9 +19,6 @@ const Todo = (props) => {
   const outsideref = useRef(null);
   useOutsideClick(outsideref, setAreaOpen);
 
-  const change = (i) => {
-    props.callback(i);
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();

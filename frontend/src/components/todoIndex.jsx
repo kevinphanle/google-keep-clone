@@ -22,7 +22,12 @@ const Card = props => {
     })
   }
 
+  const handleCurrentTodo = (todo) => {
+    props.setCurrentTodo(todo);
+  }
+
   const modalOpen = () => {
+    handleCurrentTodo(props.todo);
     props.modalOpen(true);
   }
 
@@ -52,7 +57,7 @@ const Card = props => {
 }
 
 const TodoIndex = (props) => {
-  console.log(props)
+  // console.log(props)
 
   const todoList = () => {
     return props.data.map((currentTodo, i) => {
@@ -61,6 +66,7 @@ const TodoIndex = (props) => {
         deleteCallback={props.deleteCallback}
         key={i}
         modalOpen={props.setModalOpen}
+        setCurrentTodo={props.setCurrentTodo}
       />
     })
   }

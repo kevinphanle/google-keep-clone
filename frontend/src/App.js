@@ -15,6 +15,7 @@ function App() {
 
   const [todos, setTodos] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
     axios.get('http://localhost:5000/todos/')
@@ -40,9 +41,9 @@ function App() {
       <div className="App">
         <Navbar />
         <Todo callback={newTodo.bind(this)}/>
-        <TodoIndex data={todos} deleteCallback={deleteTodo} setModalOpen={setModalOpen}/>
+        <TodoIndex data={todos} deleteCallback={deleteTodo} setModalOpen={setModalOpen} setCurrentTodo={setCurrentTodo} />
 
-        {modalOpen ? <Modal setModalOpen={setModalOpen}/> : null }
+        {modalOpen ? <Modal setModalOpen={setModalOpen} todo={currentTodo} /> : null }
       </div>
 
     </Router>
