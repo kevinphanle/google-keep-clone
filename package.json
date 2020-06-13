@@ -3,10 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "main": "app.js",
+  "engines": {
+    "node": "12.16.3"
+  },
   "scripts": {
     "server": "nodemon app.js",
+    "start": "node app.js",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\""
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "dependencies": {
     "axios": "^0.19.2",
