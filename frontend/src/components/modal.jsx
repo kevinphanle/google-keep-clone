@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const Modal = (props) => {
   const { todo } = props
-  console.log(props.todo);
 
   const closeModal = () => {
     props.setModalOpen(false);

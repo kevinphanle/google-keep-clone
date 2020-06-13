@@ -31,7 +31,6 @@ function App() {
   }
 
   const deleteTodo = (id) => {
-    console.log("from app.js: ", id)
     return setTodos(todos.filter(todo => todo._id !== id))
   }
   // console.log(todos);

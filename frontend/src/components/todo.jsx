@@ -42,7 +42,6 @@ const Todo = (props) => {
     } else {
       // console.log("need text");
       errortext = "Need Text";
-      console.log(errortext)
       setError(true);
     }
 
@@ -113,12 +112,18 @@ const Todo = (props) => {
           areaOpen ? <div className="open">
 
 
-            {isColorOpen ? <CirclePicker
-              color={todoColor}
-              onChangeComplete={handleColorChange}
-              width="90%" margin="auto"
-            ></CirclePicker> : null}
-
+            {isColorOpen ?
+              <div className="colorp">
+                <CirclePicker
+                  color={todoColor}
+                  onChangeComplete={handleColorChange}
+                  width="400px" margin="auto"
+                  marginRight="0"
+                  marginBottom="0"
+                ></CirclePicker>
+              </div>
+              : null
+            }
             <div className="bottom-bar">
 
 

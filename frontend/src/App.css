@@ -45,7 +45,7 @@ body {
 }
 
 .todo form {
-  width: 40%;
+  width: 500px;
   margin: auto;
   border: 1px solid lightgray;
   display: flex;
@@ -127,6 +127,12 @@ form .open {
   text-decoration: none;
   font-size: 16px;
   margin-right: 10px;
+}
+
+.colorp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo-index {
