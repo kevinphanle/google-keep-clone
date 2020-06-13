@@ -10,7 +10,7 @@ const Card = props => {
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    axios.delete(`http://localhost:5000/todos/removeTodo/${props.todo._id}`)
+    axios.delete(`/todos/removeTodo/${props.todo._id}`)
       .then(res => console.log(res.data))
       .then(() => props.deleteCallback(props.todo._id))
       .catch(e => {

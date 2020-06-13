@@ -31,7 +31,7 @@ const Todo = (props) => {
     }
 
     if (todo.text !== "") {
-      axios.post('http://localhost:5000/todos/addTodo', todo)
+      axios.post('/todos/addTodo', todo)
         .then(res => console.log(res.data))
         .catch((err) => {
           console.log('error in adding todo')
