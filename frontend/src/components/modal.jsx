@@ -32,7 +32,7 @@ const Modal = (props) => {
     }
 
 
-    axios.patch(`http://localhost:5000/todos/update/${props.todo._id}`, newTodo)
+    axios.patch(`/todos/update/${props.todo._id}`, newTodo)
       .then(res => {
         console.log(res.data)
         closeModal();

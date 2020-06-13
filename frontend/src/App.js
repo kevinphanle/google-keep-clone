@@ -18,7 +18,7 @@ function App() {
   const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
-    axios.get('http://localhost:5000/todos/')
+    axios.get('/todos/')
       .then(res => {
         setTodos(res.data.reverse())
       }).catch(function (err) {
