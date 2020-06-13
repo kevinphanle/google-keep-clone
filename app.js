@@ -13,6 +13,14 @@ var todoRouter = require('./routes/todos');
 
 var app = express();
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
+
+
 app.use(cors());
 
 mongoose.connect(db, { useNewUrlParser: true })
