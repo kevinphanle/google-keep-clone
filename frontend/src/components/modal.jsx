@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CirclePicker } from 'react-color';
 
 // import Todo from './todo';
@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const Modal = (props) => {
   const { todo } = props
+  console.log(props.todo);
 
   const closeModal = () => {
     props.setModalOpen(false);
@@ -13,7 +14,7 @@ const Modal = (props) => {
 
   const [isColorOpen, setColorOpen] = useState(false);
   const [error, setError] = useState(false);
-  let errortext = "";
+  // let errortext = "";
 
   const [todoTitle, setTodoTitle] = useState(todo.title);
   const [todoText, setTodoText] = useState(todo.text);
@@ -22,7 +23,7 @@ const Modal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let todo = {
+    let newTodo = {
       title: todoTitle,
       text: todoText,
       color: todoColor,
@@ -30,20 +31,18 @@ const Modal = (props) => {
       hasAttachment: false
     }
 
-    if (todo.text !== "") {
-      axios.patch(`http://localhost:5000/todos/update/${todo._id}`, todo)
-        .then(res => console.log(res.data))
-        .catch((err) => {
-          console.log('error in updating todo')
-          return Promise.reject(err)
-        })
-      setError(false);
-    } else {
-      // console.log("need text");
-      errortext = "Need Text";
-      console.log(errortext)
-      setError(true);
-    }
+
+    axios.patch(`http://localhost:5000/todos/update/${props.todo._id}`, newTodo)
+      .then(res => {
+        console.log(res.data)
+        closeModal();
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log('error in updating todo')
+        return Promise.reject(err)
+      })
+
 
   }
 
@@ -131,11 +130,11 @@ const Modal = (props) => {
 
               <a href="#"
                 className="color-pallete"
-                style={{color: style.text}}
+                style={{ color: style.text }}
                 onClick={() => setColorOpen(!isColorOpen)}
               >Color</a>
               <button
-                style={{color: style.text}}
+                style={{ color: style.text }}
                 type="submit"
                 className="done-button"
               >Done

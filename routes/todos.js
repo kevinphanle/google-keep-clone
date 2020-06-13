@@ -50,7 +50,9 @@ router.post('/addTodo', (req, res) => {
 });
 
 router.patch('/update/:id', (req, res) => {
-  TodosModel.findByIdAndUpdate({ _id: req.params.id }, {
+  console.log(req.body);
+  console.log(req.params);
+  TodosModel.findByIdAndUpdate(req.params.id, {
     title: req.body.title,
     text: req.body.text,
     color: req.body.color,

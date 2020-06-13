@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+
+import removeIcon from '../images/remove.png';
 
 
 const Card = props => {
 
-  const handleDelete = () => {
+  const [isHover, setHover] = useState(false);
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
     axios.delete(`http://localhost:5000/todos/removeTodo/${props.todo._id}`)
       .then(res => console.log(res.data))
       .then(() => props.deleteCallback(props.todo._id))
@@ -14,13 +19,6 @@ const Card = props => {
     // .then(() => axios.get('http://localhost:5000/todos/'));
   }
 
-  const handleUpdate = () => {
-    axios.put(`http://localhost:5000/todos/update/${props.todo._id}`)
-      .then(res => console.log(res.data))
-      .catch(e => {
-        console.log(e);
-    })
-  }
 
   const handleCurrentTodo = (todo) => {
     props.setCurrentTodo(todo);
@@ -31,6 +29,14 @@ const Card = props => {
     props.modalOpen(true);
   }
 
+  const handleHover = () => {
+    if (isHover) {
+      setHover(false);
+    } else {
+      setHover(true);
+    }
+  }
+
   const color = props.todo.color
 
   return (
@@ -38,6 +44,9 @@ const Card = props => {
       className="card"
       style={{ backgroundColor: color, color: color === "#fff" ? "#444" : "#fff" }}
       onClick={modalOpen}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
+      // onMouseOut={setHover(false)}
     >
       {
         props.todo.title !== "" ? <div className="title">
@@ -48,9 +57,13 @@ const Card = props => {
       <div className="text">
         {props.todo.text}
       </div>
-      <button className="delete" onClick={handleDelete} style={{ backgroundColor: color, color: color === "#fff" ? "rgb(130, 129, 129)" : "#fff" }}>
-        X
-    </button>
+
+      {
+        isHover ? <button className="delete" onClick={handleDelete} style={{ backgroundColor: color, color: color === "#fff" ? "rgb(130, 129, 129)" : "#fff" }}>
+          <img src={removeIcon} alt="" />
+        </button> : null
+      }
+
     </li>
 
   )
