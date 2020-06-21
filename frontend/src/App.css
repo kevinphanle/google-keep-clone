@@ -17,7 +17,7 @@ body {
 .nav {
   /* background: blue; */
   border-bottom: 1px solid lightgray;
-  font-size: 50px;
+  
   width: 100%;
   text-align: left;
   /* height: 100px; */
@@ -26,15 +26,39 @@ body {
   z-index: 2;
   top: 0;
   left: 0;
+  height: 100px;
+  display: flex;
+  justify-content: space-evenly;
   /* text-align: center; */
 }
 
 .nav .title {
-  width: 95%;
+  /* width: 95%; */
   padding: 10px;
-  height: auto;
-  margin: auto auto;
+  /* height: auto; */
+  /* margin: auto auto; */
   align-items: center;
+  font-size: 50px;
+}
+
+.nav .rightnav {
+  width: 30%;
+  height: 50%;
+  margin: auto 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.rightnav a {
+  /* width: 50px; */
+  /* height: 50px; */
+  margin-right: 20px;
+}
+
+.rightnav a img {
+  width: 50px;
+  height: 50px;
+  /* margin-right: 20px; */
 }
 
 .todo {
